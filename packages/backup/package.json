@@ -1,0 +1,38 @@
+{
+  "name": "@flystorage/backup",
+  "type": "module",
+  "version": "1.0.0",
+  "dependencies": {
+    "@flystorage/file-storage": "^1.2.2",
+    "@flystorage/local-fs": "^1.2.0"
+  },
+  "description": "Backup utility and destination adapters for Flystorage.",
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "compile": "rm -rf ./dist/ && concurrently npm:compile:* && echo '{\"type\": \"commonjs\"}' > ./dist/cjs/package.json",
+    "compile:esm": "tsc --outDir ./dist/esm/ --declaration false",
+    "compile:cjs": "tsc --outDir ./dist/cjs/ --declaration false --module commonjs --moduleResolution node",
+    "compile:types": "tsc --outDir ./dist/types/ --declaration --emitDeclarationOnly",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "backup",
+    "storage",
+    "flystorage"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}
